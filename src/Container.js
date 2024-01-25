@@ -1,9 +1,9 @@
-import {useState} from "react";
-
+import {useEffect, useState} from "react";
+import ProductsList from './ProductsList';
 
 const Container = () => {
-    const [products, setProducts] = useState({
-        products: [
+
+    const [products1, setProducts1] = useState([
             {
                 id: 1,
                 title: "iPhone 9",
@@ -167,32 +167,34 @@ const Container = () => {
                 ]
             },
         ]
+    );
 
-    });
+    const [products, setProducts] = useState(null);
+
+    const [isWaiting, setIsWaiting] = useState(true);
+
+    const deleteAction = (id) => {
+        const updatedProducts = products.filter(product => product.id != id);
+        setProducts(updatedProducts);
+    }
+
+
+    useEffect(() => {
+        setTimeout(() => {
+            fetch('https://dummyjson.com/users')
+                .then(response => {
+                    return response.json();
+                })
+                .then(data => {
+                    setProducts(data.users);
+                    setIsWaiting(false);
+                })
+        }, 2000);
+    }, []);
+
     return (
-        <div className='container'>
-
-
-            <table className="table">
-                <thead>
-                <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">First</th>
-                    <th scope="col">Price</th>
-                    <th scope="col">Stock</th>
-                </tr>
-                </thead>
-                <tbody>
-                {products.products.map((product) => (
-                    <tr>
-                        <th scope="row">{product.id}</th>
-                        <td>{product.title}</td>
-                        <td>{product.price}</td>
-                        <td>{product.stock}</td>
-                    </tr>
-                ))}
-                </tbody>
-            </table>
+        <div className="container">
+            <ProductsList products={products} isWaiting={isWaiting} deleteAction={deleteAction}/>
         </div>
     );
 }
