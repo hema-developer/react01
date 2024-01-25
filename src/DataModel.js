@@ -5,22 +5,28 @@ const DataModel = (url) => {
 
     const [isWaiting, setIsWaiting] = useState(true);
     const [isError, setIsError] = useState(false);
+    const deleteAction = (id) => {
+        const updatedProducts = products.filter(product => product.id != id);
+        setProducts(updatedProducts);
+    }
+
     useEffect(() => {
         setTimeout(() => {
-            fetch('https://dummyjson.com/users')
+            fetch(url)
                 .then(response => {
+                    console.log(response);
                     return response.json();
                 })
                 .then(data => {
-                    setProducts(data.users);
+                    setProducts(data);
                     setIsWaiting(false);
                 }).catch(e => {
                 setIsError(e.message);
                 setIsWaiting(false);
             });
-        }, 2000);
+        }, 200);
     }, [url]);
 
-    return {products, isWaiting, isError};
+    return {products, isWaiting, isError,deleteAction};
 }
 export default DataModel;

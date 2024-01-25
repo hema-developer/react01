@@ -15,14 +15,18 @@ const ProductsList=({products,deleteAction,isWaiting})=>{
                 </tr>
                 </thead>
                 <tbody>
-                {isWaiting && <tr><th colSpan='5'>Please Waiting....</th></tr>}
-                {products && products.map((product) => (
+                {isWaiting &&
+                <tr><th colSpan='5'><div className="spinner-border text-primary" role="status">
+                    <span className="visually-hidden">Loading...</span>
+                </div></th></tr>}
+                {products && products.users.map((product) => (
                     <tr key={product.id}>
                         <th scope="row" >{product.id}</th>
                         <td>{product.firstName + '' + product.lastName}</td>
                         <td>{product.age}</td>
                         <td>{product.gender}</td>
                         <td>
+                            <a type="button" href={/users/+product.id} className="btn btn-info">View</a>
                             <button type="button" onClick={() => deleteAction(product.id)} className="btn btn-danger">Delete</button>
                         </td>
                     </tr>

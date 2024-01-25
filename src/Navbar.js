@@ -1,6 +1,7 @@
 import {BrowserRouter, Link, Route, Routes} from "react-router-dom";
 import Home from './Home';
 import Users from './Users';
+import DataInfo from './DataInfo';
 import About from './About';
 
 const Navbar = () => {
@@ -9,7 +10,7 @@ const Navbar = () => {
             <BrowserRouter>
                 <nav className="navbar navbar-expand-lg bg-body-tertiary">
                     <div className="container-fluid">
-                        <a className="navbar-brand" href="#">Navbar</a>
+                        <a className="navbar-brand" href="#">Site Name</a>
                         <button className="navbar-toggler" type="button" data-bs-toggle="collapse"
                                 data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                                 aria-expanded="false" aria-label="Toggle navigation">
@@ -38,6 +39,7 @@ const Navbar = () => {
                 <Routes>
                     <Route path="/" element={<Home/>}/>
                     <Route path="/users" element={<Users/>}/>
+                    <Route path="/users/:id" element={<DataInfo/>}/>
                     <Route path="/about" element={<About/>}/>
                 </Routes>
             </BrowserRouter>
