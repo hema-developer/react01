@@ -1,7 +1,11 @@
 import {BrowserRouter, Link, Route, Routes} from "react-router-dom";
 import Home from './Home';
 import Users from './Users';
-import DataInfo from './DataInfo';
+import AddUser from './AddUser';
+import UserUpdate from './UpdateUser';
+import UserInfo from './UserInfo';
+import Posts from './Posts';
+import PostInfo from './PostInfo';
 import About from './About';
 
 const Navbar = () => {
@@ -19,10 +23,13 @@ const Navbar = () => {
                         <div className="collapse navbar-collapse" id="navbarSupportedContent">
                             <ul className="navbar-nav me-auto mb-2 mb-lg-0">
                                 <li className="nav-item">
-                                    <Link className="nav-link active" to="/">Home</Link>
+                                    <Link className="nav-link " to="/">Home</Link>
                                 </li>
                                 <li className="nav-item">
                                     <Link className="nav-link" to="/users">Users</Link>
+                                </li>
+                                <li className="nav-item">
+                                    <Link className="nav-link" to="/posts">Posts</Link>
                                 </li>
                                 <li className="nav-item">
                                     <Link className="nav-link" to="/about">About</Link>
@@ -37,10 +44,14 @@ const Navbar = () => {
                     </div>
                 </nav>
                 <Routes>
-                    <Route path="/" element={<Home/>}/>
-                    <Route path="/users" element={<Users/>}/>
-                    <Route path="/users/:id" element={<DataInfo/>}/>
-                    <Route path="/about" element={<About/>}/>
+                    <Route path="/" className="active"  element={<Home/>}/>
+                    <Route path="/users" className="active"  element={<Users/>}/>
+                    <Route path="/users/add" className="active"  element={<AddUser/>}/>
+                    <Route path="/users/:id" className="active"  element={<UserUpdate/>}/>
+                    <Route path="/users/:id/view" className="active"  element={<UserInfo/>}/>
+                    <Route path="/posts" className="active"  element={<Posts/>}/>
+                    <Route path="/posts/:id" className="active"  element={<PostInfo/>}/>
+                    <Route path="/about" className="active"  element={<About/>}/>
                 </Routes>
             </BrowserRouter>
 

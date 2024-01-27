@@ -1,10 +1,9 @@
 import {useParams} from "react-router-dom";
 import DataModel from "./DataModel";
-import ProductsList from "./ProductsList";
 
-const DataInfo = () => {
+const PostInfo = () => {
     const {id} = useParams();
-    const {products, isWaiting, isError,deleteAction} = DataModel('https://dummyjson.com/users/'+ id)
+    const {allData, isWaiting, isError,deleteAction} = DataModel('https://dummyjson.com/posts/'+ id)
     return (
         <div className="container">
             {isError && <h1>{isError}</h1>}
@@ -14,16 +13,15 @@ const DataInfo = () => {
             </div>}
 
 
-            {products &&
+            {allData &&
             <div className="d-flex position-relative">
-                <img src={products.image} className="flex-shrink-0 me-3" alt="..."/>
                     <div>
-                        <h5 className="mt-0">{products.firstName +' '+products.maidenName+' '+ products.lastName}</h5>
-                        <p>{products.userAgent}</p>
+                        <h5 className="mt-0">{allData.title}</h5>
+                        <p>{allData.body}</p>
                     </div>
             </div>
                 }
         </div>
     );
 }
-export default DataInfo;
+export default PostInfo;

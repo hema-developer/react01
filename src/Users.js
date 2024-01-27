@@ -1,16 +1,14 @@
-import ProductsList from './ProductsList';
+import UsersDataTable from './UsersDataTable';
 import DataModel from "./DataModel";
 
 const Users = () => {
 
-    const {products, isWaiting, isError,deleteAction} = DataModel('https://dummyjson.com/users')
-
-
+    const {allData, isWaiting, isError, deleteAction} = DataModel('https://dummyjson.com/users');
 
     return (
         <div className="container">
             {isError && <h1>{isError}</h1>}
-            <ProductsList products={products} isWaiting={isWaiting} deleteAction={deleteAction} />
+            <UsersDataTable allData={allData} isWaiting={isWaiting} deleteAction={deleteAction}/>
             {/*<ProductsList products={products} isWaiting={isWaiting} deleteAction={deleteAction}/>*/}
         </div>
     );

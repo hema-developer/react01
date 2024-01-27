@@ -1,24 +1,23 @@
 import {useEffect, useState} from "react";
 
 const DataModel = (url) => {
-    const [products, setProducts] = useState(null);
+    const [allData, setAllData] = useState(null);
 
     const [isWaiting, setIsWaiting] = useState(true);
     const [isError, setIsError] = useState(false);
     const deleteAction = (id) => {
-        const updatedProducts = products.filter(product => product.id != id);
-        setProducts(updatedProducts);
+        const updatedAllData = allData.filter(item => item.id != id);
+        setAllData(updatedAllData);
     }
 
     useEffect(() => {
         setTimeout(() => {
             fetch(url)
                 .then(response => {
-                    console.log(response);
                     return response.json();
                 })
                 .then(data => {
-                    setProducts(data);
+                    setAllData(data);
                     setIsWaiting(false);
                 }).catch(e => {
                 setIsError(e.message);
@@ -27,6 +26,6 @@ const DataModel = (url) => {
         }, 200);
     }, [url]);
 
-    return {products, isWaiting, isError,deleteAction};
+    return {allData, isWaiting, isError,deleteAction};
 }
 export default DataModel;
